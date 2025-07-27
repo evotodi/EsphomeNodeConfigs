@@ -1,0 +1,45 @@
+esphome:
+  name: hvac-living-room-ceiling
+  friendly_name: HVAC Living Room Ceiling
+
+esp8266:
+  board: nodemcu
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "stsG8i3zdx55zm4/1zu9EiNvqsQ3wBq0BylUGetX/YM="
+
+ota:
+  - platform: esphome
+    password: "a40d03bfcd04b71d9022212bd704ef67"
+
+wifi:
+  ssid: !secret iot_wifi_ssid
+  password: !secret iot_wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Hvac-Living-Room-Ceiling"
+    password: "7tRD3M0oH6Eh"
+
+captive_portal:
+
+i2c:
+  sda: GPIO4 # D2 # GPIO4 for ESP8266 # GPIO21 for ESP32
+  scl: GPIO5 # D1 # GPIO5 for ESP8266 # GPIO22 For ESP32
+
+sensor:
+  - platform: aht10
+    variant: AHT20
+    temperature:
+      name: "Temperature"
+      unit_of_measurement: °F
+      filters: 
+        - lambda: return x * (9.0/5.0) + 32.0;
+    humidity:
+      name: "Humidity"
+    update_interval: 60s        

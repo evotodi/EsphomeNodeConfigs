@@ -1,0 +1,45 @@
+esphome:
+  name: hvac-isabelle
+  friendly_name: HVAC Isabelle
+
+esp8266:
+  board: nodemcu
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "Rw89jY2BuslmOueVwGqdInRbuR33MOCb0Nq7Y0hWDKc="
+
+ota:
+  - platform: esphome
+    password: "fd2826810eaebc086842694f4993b501"
+
+wifi:
+  ssid: !secret iot_wifi_ssid
+  password: !secret iot_wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Hvac-Isabelle Fallback Hotspot"
+    password: "DntZF7PVtm7r"
+
+captive_portal:
+
+i2c:
+  sda: GPIO4 # D2 # GPIO4 for ESP8266 # GPIO21 for ESP32
+  scl: GPIO5 # D1 # GPIO5 for ESP8266 # GPIO22 For ESP32
+
+sensor:
+  - platform: aht10
+    variant: AHT20
+    temperature:
+      name: "Temperature"
+      unit_of_measurement: °F
+      filters: 
+        - lambda: return x * (9.0/5.0) + 32.0;
+    humidity:
+      name: "Humidity"
+    update_interval: 60s    

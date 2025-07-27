@@ -1,0 +1,45 @@
+esphome:
+  name: hvac-living-room-south
+  friendly_name: HVAC Living Room South
+
+esp8266:
+  board: nodemcu
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "5rSt0gVwenehlu8l17/zj95LgAFNbALRxS6FbiFYhAM="
+
+ota:
+  - platform: esphome
+    password: "ec129d43bc32bb22a2c4eae2b5156582"
+
+wifi:
+  ssid: !secret iot_wifi_ssid
+  password: !secret iot_wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Hvac-Living-Room-South"
+    password: "veWHSQ01Rb5b"
+
+captive_portal:
+
+i2c:
+  sda: GPIO4 # D2 # GPIO4 for ESP8266 # GPIO21 for ESP32
+  scl: GPIO5 # D1 # GPIO5 for ESP8266 # GPIO22 For ESP32
+
+sensor:
+  - platform: aht10
+    variant: AHT20
+    temperature:
+      name: "Temperature"
+      unit_of_measurement: °F
+      filters: 
+        - lambda: return x * (9.0/5.0) + 32.0;
+    humidity:
+      name: "Humidity"
+    update_interval: 60s

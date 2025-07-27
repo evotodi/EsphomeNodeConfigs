@@ -1,0 +1,145 @@
+substitutions:
+  name: propanemonitor
+  friendly_name: Propane Monitor
+  tx_pin: GPIO17
+  rx_pin: GPIO16
+  lvl_pin: GPIO36
+  ow_pin: GPIO4
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+  min_version: 2025.4.2
+  platformio_options:
+    upload_speed: 921600
+  includes:
+    - <Arduino.h>
+    - <OneWire.h>
+    - <DallasTemperature.h>
+  libraries:
+    - milesburton/DallasTemperature@^3.9.1
+
+esp32:
+  board: esp-wrover-kit
+  framework:
+    type: arduino
+    version: recommended
+
+external_components:
+  - source: github://KinDR007/VictronMPPT-ESPHOME@0e5efa1497a2a6ef4db8348fe82e1507f4ba3e19
+    refresh: 0s
+  - source: github://evotodi/EspHomePropaneMonitor
+    refresh: 0s
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "hS6jZi+RNEn9YNTJIntXQeFXw3M07ksipIS9fwpXi+o="
+
+ota:
+  - platform: esphome
+    password: "1def4b1f7fb7cc3109c552d61c666410"
+
+wifi:
+  ssid: !secret iot_wifi_ssid
+  password: !secret iot_wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Propanemonitor Fallback Hotspot"
+    password: "G9UU9dycyrVU"
+
+captive_portal:
+
+uart:
+  id: uart_0
+  baud_rate: 19200
+  tx_pin: ${tx_pin}
+  rx_pin: ${rx_pin}
+  rx_buffer_size: 256
+#  debug:
+#    direction: BOTH
+#    dummy_receiver: false
+#    after:
+#      delimiter: "\n"
+#    sequence:
+#      - lambda: UARTDebug::log_string(direction, bytes);
+
+propane:
+  id: propane0
+
+victron:
+  uart_id: uart_0
+  id: victron0
+  throttle: 10s
+
+sensor:
+  - platform: propane
+    level_direct:
+      name: "${name} level direct"
+      level_pin: ${lvl_pin}
+      max_adc: 2911
+      max_pct: 90.0
+    level_corrected:
+      name: "${name} level corrected"
+    temp_sensor:
+      name: "${name} temperature"
+      ow_pin: ${ow_pin}
+
+  - platform: victron
+    victron_id: victron0
+    max_power_yesterday:
+      name: "${name} max power yesterday"
+    max_power_today:
+      name: "${name} max power today"
+#    yield_total:
+#      name: "${name} yield total"
+    yield_yesterday:
+      name: "${name} yield yesterday"
+    yield_today:
+      name: "${name} yield today"
+    panel_voltage:
+      name: "${name} panel voltage"
+    panel_power:
+      name: "${name} panel power"
+    battery_current:
+      name: "${name} panel current"
+    battery_voltage:
+      name: "${name} battery voltage"
+#    day_number:
+#      name: "${name} day number"
+#    charging_mode_id:
+#      name: "${name} charging mode id"
+#    error_code:
+#      name: "${name} error code"
+#    tracking_mode_id:
+#      name: "${name} tracking mode id"
+    load_current:
+      name: "${name} load current"
+
+text_sensor:
+  - platform: victron
+    victron_id: victron0
+    charging_mode:
+      name: "${name} charging mode"
+    error:
+      name: "${name} error"
+    tracking_mode:
+      name: "${name} tracking mode"
+#    firmware_version:
+#      name: "${name} firmware version"
+#    device_type:
+#      name: "${name} device type"
+#    serial_number:
+#      name: "${name} serial number"
+
+binary_sensor:
+  - platform: victron
+    victron_id: victron0
+    load_state:
+      name: "${name} load state"
+    relay_state:
+      name: "${name} relay state"
