@@ -3,7 +3,7 @@ substitutions:
   node_name: garage
   friendly_name: Garage
   ap_ssid: HVAC_Garage
-  t_offset: "0"
+  t_offset: "-6.6"
 
 packages:
   - !include .pkg_hvac-base.yaml

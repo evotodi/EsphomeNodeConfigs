@@ -3,7 +3,7 @@ substitutions:
   node_name: hall-bath
   friendly_name: Hall Bath
   ap_ssid: HVAC_HBath
-  t_offset: "0"
+  t_offset: "-2.2"
 
 packages:
   - !include .pkg_hvac-base.yaml

@@ -3,7 +3,7 @@ substitutions:
   node_name: living-room-south
   friendly_name: Living Room South
   ap_ssid: HVAC_LR_South
-  t_offset: "0"
+  t_offset: "-1.7"
 
 packages:
   - !include .pkg_hvac-base.yaml

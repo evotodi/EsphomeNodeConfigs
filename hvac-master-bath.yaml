@@ -3,7 +3,7 @@ substitutions:
   node_name: master-bath
   friendly_name: Master Bath
   ap_ssid: HVAC_MBath
-  t_offset: "0"
+  t_offset: "-1.4"
 
 packages:
   - !include .pkg_hvac-base.yaml

@@ -3,7 +3,7 @@ substitutions:
   node_name: living-room-ceiling
   friendly_name: Living Room Ceiling
   ap_ssid: HVAC_LR_Ceil
-  t_offset: "0"
+  t_offset: "-22.6"
 
 packages:
   - !include .pkg_hvac-base.yaml

@@ -3,7 +3,7 @@ substitutions:
   node_name: isabelle
   friendly_name: Isabelle
   ap_ssid: HVAC_Isabelle
-  t_offset: "0"
+  t_offset: "-5"
 
 packages:
   - !include .pkg_hvac-base.yaml
