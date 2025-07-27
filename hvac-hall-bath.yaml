@@ -3,8 +3,9 @@ substitutions:
   node_name: hall-bath
   friendly_name: Hall Bath
   ap_ssid: HVAC_HBath
-  sensor_platform: aht10
-  sensor_model: AHT20
   t_offset: "0"
+
+packages:
+  !include .pkg_hvac-aht10.yaml
 
 <<: !include .inc_hvac-base.yaml

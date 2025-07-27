@@ -3,8 +3,9 @@ substitutions:
   node_name: family-room-south
   friendly_name: Family Room South
   ap_ssid: HVAC_FM_South
-  sensor_platform: aht10
-  sensor_model: AHT20
   t_offset: "0"
+
+packages:
+  !include .pkg_hvac-aht10.yaml
 
 <<: !include .inc_hvac-base.yaml

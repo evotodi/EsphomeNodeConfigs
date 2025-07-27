@@ -3,8 +3,9 @@ substitutions:
   node_name: master-bedroom
   friendly_name: Master Bedroom
   ap_ssid: HVAC_MBed
-  sensor_platform: aht10
-  sensor_model: AHT20
   t_offset: "0"
+
+packages:
+  !include .pkg_hvac-aht10.yaml
 
 <<: !include .inc_hvac-base.yaml

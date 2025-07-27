@@ -3,8 +3,9 @@ substitutions:
   node_name: master-bath
   friendly_name: Master Bath
   ap_ssid: HVAC_MBath
-  sensor_platform: htu21d
-  sensor_model: htu21d
   t_offset: "0"
+
+packages:
+  !include .pkg_hvac-htu21d.yaml
 
 <<: !include .inc_hvac-base.yaml

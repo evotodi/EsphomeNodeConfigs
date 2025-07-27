@@ -3,8 +3,9 @@ substitutions:
   node_name: living-room-ceiling
   friendly_name: Living Room Ceiling
   ap_ssid: HVAC_LR_Ceil
-  sensor_platform: aht10
-  sensor_model: AHT20
   t_offset: "0"
+
+packages:
+  !include .pkg_hvac-aht10.yaml
 
 <<: !include .inc_hvac-base.yaml
