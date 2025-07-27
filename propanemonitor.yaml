@@ -5,6 +5,7 @@ substitutions:
   rx_pin: GPIO16
   lvl_pin: GPIO36
   ow_pin: GPIO4
+  ap_ssid: Propanemonitor Fallback Hotspot
 
 esphome:
   name: ${name}
@@ -34,23 +35,7 @@ external_components:
 # Enable logging
 logger:
 
-# Enable Home Assistant API
-api:
-  encryption:
-    key: "hS6jZi+RNEn9YNTJIntXQeFXw3M07ksipIS9fwpXi+o="
-
-ota:
-  - platform: esphome
-    password: "1def4b1f7fb7cc3109c552d61c666410"
-
-wifi:
-  ssid: !secret iot_wifi_ssid
-  password: !secret iot_wifi_password
-
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: "Propanemonitor Fallback Hotspot"
-    password: "G9UU9dycyrVU"
+<<: !include .inc_wifi-iot-ap.yaml
 
 captive_portal:
 

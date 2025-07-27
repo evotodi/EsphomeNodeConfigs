@@ -1,45 +1,10 @@
-esphome:
-  name: hvac-hall-bath
-  friendly_name: HVAC Hall Bath
+---
+substitutions:
+  node_name: hall-bath
+  friendly_name: Hall Bath
+  ap_ssid: HVAC_HBath
+  sensor_platform: aht10
+  sensor_model: AHT20
+  t_offset: "0"
 
-esp8266:
-  board: nodemcu
-
-# Enable logging
-logger:
-
-# Enable Home Assistant API
-api:
-  encryption:
-    key: "8jJ0uWgdjNDBZcHCwB9wUdjOBb0scAXfqTSDfjzKK0g="
-
-ota:
-  - platform: esphome
-    password: "e360492e6c7e920bffb35f954e056156"
-
-wifi:
-  ssid: !secret iot_wifi_ssid
-  password: !secret iot_wifi_password
-
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: "Hvac-Hall-Bath Fallback Hotspot"
-    password: "wEeDhN3P8YYx"
-
-captive_portal:
-
-i2c:
-  sda: GPIO4 # D2 # GPIO4 for ESP8266 # GPIO21 for ESP32
-  scl: GPIO5 # D1 # GPIO5 for ESP8266 # GPIO22 For ESP32
-
-sensor:
-  - platform: aht10
-    variant: AHT20
-    temperature:
-      name: "Temperature"
-      unit_of_measurement: °F
-      filters: 
-        - lambda: return x * (9.0/5.0) + 32.0;
-    humidity:
-      name: "Humidity"
-    update_interval: 60s        
+<<: !include .inc_hvac-base.yaml

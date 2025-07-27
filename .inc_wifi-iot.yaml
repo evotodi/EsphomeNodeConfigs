@@ -1,0 +1,13 @@
+---
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret iot_encryption
+
+ota:
+  - platform: esphome
+    password: !secret iot_ota
+
+wifi:
+  ssid: !secret iot_wifi_ssid
+  password: !secret iot_wifi_password

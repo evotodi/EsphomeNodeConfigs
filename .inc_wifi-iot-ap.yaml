@@ -1,0 +1,20 @@
+---
+# Requires:
+#   $ap_ssid
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret iot_encryption
+
+ota:
+  - platform: esphome
+    password: !secret iot_ota
+
+wifi:
+  ssid: !secret iot_wifi_ssid
+  password: !secret iot_wifi_password
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: $ap_ssid
+    password: !secret iot_ap_pass

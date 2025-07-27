@@ -1,44 +1,10 @@
-esphome:
-  name: hvac-master-bath
-  friendly_name: HVAC Master Bath
+---
+substitutions:
+  node_name: master-bath
+  friendly_name: Master Bath
+  ap_ssid: HVAC_MBath
+  sensor_platform: htu21d
+  sensor_model: htu21d
+  t_offset: "0"
 
-esp8266:
-  board: nodemcu
-
-# Enable logging
-logger:
-
-# Enable Home Assistant API
-api:
-  encryption:
-    key: "nmj21zPX8hkyoTFLXdSvZSXHrJJKlDGUXPdeOkjGrC0="
-
-ota:
-  - platform: esphome
-    password: "909a3414afb4ca285a89ab69cdb52af0"
-
-wifi:
-  ssid: !secret iot_wifi_ssid
-  password: !secret iot_wifi_password
-
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: "Hvac-Master-Bath"
-    password: "TuqUXyKd7kwC"
-
-captive_portal:
-
-i2c:
-  sda: GPIO4 # D2 # GPIO4 for ESP8266 # GPIO21 for ESP32
-  scl: GPIO5 # D1 # GPIO5 for ESP8266 # GPIO22 For ESP32
-
-sensor:
-  - platform: htu21d
-    model: htu21d
-    temperature:
-      name: "Temperature"
-      unit_of_measurement: °F
-      filters: 
-        - lambda: return x * (9.0/5.0) + 32.0;
-    humidity:
-      name: "Humidity"
+<<: !include .inc_hvac-base.yaml

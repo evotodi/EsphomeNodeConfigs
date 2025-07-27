@@ -1,45 +1,10 @@
-esphome:
-  name: hvac-family-room-north
-  friendly_name: HVAC Family Room North
+---
+substitutions:
+  node_name: family-room-north
+  friendly_name: Family Room North
+  ap_ssid: HVAC_FM_North
+  sensor_platform: aht10
+  sensor_model: AHT20
+  t_offset: "0"
 
-esp8266:
-  board: nodemcu
-
-# Enable logging
-logger:
-
-# Enable Home Assistant API
-api:
-  encryption:
-    key: "nfaZkYxm0oSC0fv8rB2cXog7BZmB+8FyoiPh9LyaRsk="
-
-ota:
-  - platform: esphome
-    password: "28f4ee2fd15d2a531220e6fa7c371474"
-
-wifi:
-  ssid: !secret iot_wifi_ssid
-  password: !secret iot_wifi_password
-
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: "Hvac-Family-Room-North"
-    password: "IBXc8TUQOw8q"
-
-captive_portal:
-
-i2c:
-  sda: GPIO4 # D2 # GPIO4 for ESP8266 # GPIO21 for ESP32
-  scl: GPIO5 # D1 # GPIO5 for ESP8266 # GPIO22 For ESP32
-
-sensor:
-  - platform: aht10
-    variant: AHT20
-    temperature:
-      name: "Temperature"
-      unit_of_measurement: °F
-      filters: 
-        - lambda: return x * (9.0/5.0) + 32.0;
-    humidity:
-      name: "Humidity"
-    update_interval: 60s        
+<<: !include .inc_hvac-base.yaml
