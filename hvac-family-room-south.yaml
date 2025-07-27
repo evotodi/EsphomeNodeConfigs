@@ -3,7 +3,7 @@ substitutions:
   node_name: family-room-south
   friendly_name: Family Room South
   ap_ssid: HVAC_FM_South
-  t_offset: "0"
+  t_offset: "-3"
 
 packages:
   !include .pkg_hvac-aht10.yaml
