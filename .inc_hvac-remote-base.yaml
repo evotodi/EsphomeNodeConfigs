@@ -6,6 +6,9 @@
 # Can wake up for extented time by connecting CK pin to 3v3 (right side of C4)
 # Press the boot btn during led flashing at start up to calibrate the battery. Battery must be fully charged!
 
+packages:
+  !include .pkg_wifi-iot.yaml
+
 esphome:
   name: hvac-remote-$node_name
   friendly_name: HVAC Remote $friendly_name
@@ -42,7 +45,8 @@ external_components:
 # Enable logging
 logger:
 
-<<: !include .inc_wifi-iot.yaml
+wifi:
+  fast_connect: true
 
 deep_sleep:
   id: deep_sleep1

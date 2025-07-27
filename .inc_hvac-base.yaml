@@ -6,6 +6,7 @@
 #  $sensor_platform
 #  $sensor_model
 #  $t_offset
+
 esphome:
   name: hvac-$node_name
   friendly_name: HVAC $friendly_name
@@ -23,15 +24,3 @@ captive_portal:
 i2c:
   sda: GPIO4 # D2 # GPIO4 for ESP8266 # GPIO21 for ESP32
   scl: GPIO5 # D1 # GPIO5 for ESP8266 # GPIO22 For ESP32
-
-# sensor:
-#   - platform: aht10
-#     variant: AHT20
-#     temperature:
-#       name: "Temperature"
-#       unit_of_measurement: °F
-#       filters: 
-#         - lambda: return (x * (9.0/5.0) + 32.0) + $t_offset;
-#     humidity:
-#       name: "Humidity"
-#     update_interval: 60s
