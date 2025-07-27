@@ -6,6 +6,9 @@ substitutions:
   t_offset: "0"
 
 packages:
-  !include .pkg_hvac-aht10.yaml
-  
-<<: !include .inc_hvac-base.yaml
+  - !include .pkg_hvac-base.yaml
+  - !include .pkg_hvac-aht10.yaml
+
+ota:
+  - platform: esphome
+    password: "285a6bebb9eecfa581a1c77bd5bb323f"

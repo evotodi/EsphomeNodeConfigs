@@ -7,6 +7,9 @@
 #  $sensor_model
 #  $t_offset
 
+packages:
+  - !include .pkg_wifi-iot-ap.yaml
+
 esphome:
   name: hvac-$node_name
   friendly_name: HVAC $friendly_name
@@ -17,10 +20,10 @@ esp8266:
 # Enable logging
 logger:
 
-<<: !include .inc_wifi-iot-ap.yaml
-
 captive_portal:
 
 i2c:
   sda: GPIO4 # D2 # GPIO4 for ESP8266 # GPIO21 for ESP32
   scl: GPIO5 # D1 # GPIO5 for ESP8266 # GPIO22 For ESP32
+
+ota: !remove
